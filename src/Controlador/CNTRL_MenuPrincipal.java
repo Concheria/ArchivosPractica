@@ -23,12 +23,19 @@ public class CNTRL_MenuPrincipal implements ActionListener
     FRM_MenuPrincipal frame;
     FRM_LoginScreen login;
     FRM_MantenimientoUsuarios mantenimientoUsuarios;
+    ArchivoUsuarios archivos;
 
     public CNTRL_MenuPrincipal(FRM_MenuPrincipal frame, ArchivoUsuarios archivos) 
     {
         this.frame = frame;
-        login = new FRM_LoginScreen(archivos);
-        mantenimientoUsuarios = new FRM_MantenimientoUsuarios(archivos);
+        this.archivos = archivos;
+        login = new FRM_LoginScreen(archivos, this);
+        mantenimientoUsuarios = new FRM_MantenimientoUsuarios(archivos, this);
+    }
+    
+    public void mostrarMenu()
+    {
+        frame.setVisible(true);
     }
     
     public void mostrarVentanaLogin()
@@ -38,7 +45,20 @@ public class CNTRL_MenuPrincipal implements ActionListener
 
     public void crearPrimerUsuario() 
     {
+        mantenimientoUsuarios.primerUsuarioConfig();
         mantenimientoUsuarios.setVisible(true);
+    }
+    
+    public void cargarArchivo()
+    {
+        mantenimientoUsuarios.cargarArchivo();
+    }
+    
+    public void finishFirstRun()
+    {
+        archivos.cargarArchivo();
+        login.copiarArchivo();
+        login.setVisible(true);
     }
     
     public void actionPerformed(ActionEvent e) 

@@ -27,6 +27,20 @@ public class PNL_UsuarioBotones extends javax.swing.JPanel {
         jbtn_Modificar.addActionListener(controlador);
         jbtn_Eliminar.addActionListener(controlador);
     }
+    
+    public void normalConfig()
+    {
+        jbtn_Buscar.setEnabled(true);
+        jbtn_Modificar.setEnabled(true);
+        jbtn_Eliminar.setEnabled(true);
+    }
+    
+    public void primerUsuarioConfig()
+    {
+        jbtn_Buscar.setEnabled(false);
+        jbtn_Modificar.setEnabled(false);
+        jbtn_Eliminar.setEnabled(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

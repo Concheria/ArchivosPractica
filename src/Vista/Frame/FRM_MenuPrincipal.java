@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 public class FRM_MenuPrincipal extends javax.swing.JFrame {
     ArchivoUsuarios archivos;
     CNTRL_MenuPrincipal controlador;
+    
     /**
      * Creates new form MenuPrincipal
      */

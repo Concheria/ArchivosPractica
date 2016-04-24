@@ -33,7 +33,7 @@ public class MTDS_MantenimientoUsuarios
         if(archivos.cargarArchivo())
         {
             this.arrayUsuarios = archivos.getArray();
-            System.out.println("Archivo Usuarios copiado al array de Usuarios");
+            System.out.println("Archivo Usuarios copiado al array de Usuarios (En Mantenimiento Usuarios)");
         }
         else
         {
@@ -51,6 +51,8 @@ public class MTDS_MantenimientoUsuarios
     public void agregarUsuario(String[] infoUsuario)
     {
         Usuario usuarioTemp = new Usuario(infoUsuario);
+        
+        System.out.println("Usuario Temp:\nUsuario: "+usuarioTemp.getUsuario()+"\nPass: "+usuarioTemp.getPass());
         
         System.out.println("Creado Usuario Temporal:\n"+usuarioTemp.getInfo());
         

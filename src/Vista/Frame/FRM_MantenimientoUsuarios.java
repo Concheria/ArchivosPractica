@@ -6,6 +6,7 @@
 package Vista.Frame;
 
 import Controlador.CNTRL_MantenimientoUsuarios;
+import Controlador.CNTRL_MenuPrincipal;
 
 import Modelo.Archivo.ArchivoUsuarios;
 
@@ -15,16 +16,19 @@ import Modelo.Archivo.ArchivoUsuarios;
  */
 public class FRM_MantenimientoUsuarios extends javax.swing.JFrame {
     CNTRL_MantenimientoUsuarios controlador;
+    CNTRL_MenuPrincipal controlMenu;        
     ArchivoUsuarios archivos;
     String[] infoUsuario;
+    public boolean firstRun = false;
     
     /**
      * Creates new form MantenimientoUsuarios
      */
-    public FRM_MantenimientoUsuarios(ArchivoUsuarios archivos) 
+    public FRM_MantenimientoUsuarios(ArchivoUsuarios archivos, CNTRL_MenuPrincipal controlPrincipal) 
     {
         initComponents();        
         controlador = new CNTRL_MantenimientoUsuarios(this, archivos);
+        this.controlMenu = controlPrincipal;
         agregarControlador(controlador);
         infoUsuario = new String[4];
     }
@@ -39,6 +43,30 @@ public class FRM_MantenimientoUsuarios extends javax.swing.JFrame {
         infoUsuario = pnl_UsuarioInfo.getInfo();
         
         return infoUsuario;
+    }
+    
+    public void cargarArchivo()
+    {
+        controlador.cargarArchivo();
+    }
+    
+    public void normalConfig()
+    {
+        firstRun = false;
+        
+        pnl_UsuarioBotones.primerUsuarioConfig();
+    }
+    
+    public void primerUsuarioConfig()
+    {
+        firstRun = true;
+        
+        pnl_UsuarioBotones.primerUsuarioConfig();
+    }
+    
+    public void finishFirstRun()
+    {
+        controlMenu.finishFirstRun();
     }
     
     /**

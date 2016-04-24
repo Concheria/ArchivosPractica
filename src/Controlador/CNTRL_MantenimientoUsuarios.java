@@ -12,6 +12,7 @@ import Vista.Frame.FRM_MantenimientoUsuarios;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,16 +28,20 @@ public class CNTRL_MantenimientoUsuarios implements ActionListener
     {
         this.frame = frame;
         metodos = new MTDS_MantenimientoUsuarios(this,archivos);
+        this.archivos = archivos;
         System.out.println("Creado el controlador de mantenimiento de Usuarios");
+    }
+    
+    public void cargarArchivo()
+    {
+        metodos.copiarArrayArchivo();
     }
     
     public void actionPerformed(ActionEvent e) 
     {
         if(e.getActionCommand().equals("Agregar"))   
         {
-            System.out.println("Agregar Usuario");
-            metodos.agregarUsuario(frame.getInfo());
-            metodos.escribirArrayArchivo();
+            agregarUsuario();
         }
         if(e.getActionCommand().equals("Buscar"))
         {
@@ -50,5 +55,26 @@ public class CNTRL_MantenimientoUsuarios implements ActionListener
         {
             System.out.println("Eliminar Usuario");
         }
+    }
+    
+    public void agregarUsuario()
+    {
+        System.out.println("Agregar Usuario");
+            metodos.agregarUsuario(frame.getInfo());
+            metodos.escribirArrayArchivo();
+            if(frame.firstRun)
+            {
+                if(archivos.cargarArchivo())
+                {
+                    frame.normalConfig();
+                    frame.setVisible(false);
+                    frame.finishFirstRun();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al guardar el Usuario.\nIntente de nuevo");
+                    agregarUsuario();
+                }
+            }
     }
 }

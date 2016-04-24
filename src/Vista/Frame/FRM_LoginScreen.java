@@ -5,7 +5,10 @@
  */
 package Vista.Frame;
 
+import Controlador.CNTRL_LoginScreen;
+import Controlador.CNTRL_MenuPrincipal;
 import Modelo.Archivo.ArchivoUsuarios;
+import java.util.Arrays;
 
 /**
  *
@@ -13,12 +16,45 @@ import Modelo.Archivo.ArchivoUsuarios;
  */
 public class FRM_LoginScreen extends javax.swing.JFrame {
     ArchivoUsuarios archivos;
+    CNTRL_LoginScreen controlador;
+    CNTRL_MenuPrincipal controladorMenu;
+    
     /**
      * Creates new form LoginScreen
      */
-    public FRM_LoginScreen(ArchivoUsuarios archivos) {
-        this.archivos = archivos;
+    public FRM_LoginScreen(ArchivoUsuarios archivos, CNTRL_MenuPrincipal controladorMenu) {
         initComponents();
+        this.archivos = archivos;
+        this.controladorMenu = controladorMenu;
+        controlador = new CNTRL_LoginScreen(this, archivos);
+        agregarControlador();
+    }
+    
+    public void copiarArchivo()
+    {
+        controlador.copiarArchivo();
+    }
+    
+    public void mostrarMenu()
+    {
+        controladorMenu.mostrarMenu();
+    }
+    
+    public void agregarControlador()
+    {
+        jbtn_Ingresar.addActionListener(controlador);
+    }
+    
+    public String[] getLoginInfo()
+    {
+        String[] loginInfo = new String[2];
+        
+        loginInfo[0] = jtf_Usuario.getText();
+        loginInfo[1] = (""+Arrays.toString(jpf_Pass.getPassword()));
+        
+        System.out.println("Login Info:\nUsuario: "+loginInfo[0]+"\nPass: "+loginInfo[1]);
+        
+        return loginInfo;
     }
 
     /**
